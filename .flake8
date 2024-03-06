@@ -1,0 +1,7 @@
+[flake8]
+; exclude = venv,tests 
+exclude = app.py, models.py, test_*.py,venv,tests 
+; ignore = E,F
+; ignore = W,F
+; ignore = E,W
+ignore = E,W,F
