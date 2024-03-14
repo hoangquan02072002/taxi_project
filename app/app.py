@@ -58,18 +58,11 @@ def informationdriver():
 @app.route('/OrderTaxi/<int:id>', methods=['GET'])
 def order(id):
   infordriver = TaxiService.query.get_or_404(id)
+  if infordriver.online==False:
+    return "<h3> The driver is not online, please choose another driver</h3>"
   return render_template('order.html',infordriver=infordriver)
-
-
-# @app.route('/OrderTaxi/authentication', methods=['POST'])
-# def authentication():
-#   cms=request.form.get('code')
-#   cms_code= Order.query.filter_by(cmc_code=cms).first()
-#   if cms_code:
-#     return render_template('success.html',cms_code=cms_code)
-#   else:
-#     return render_template('404.html')
-
+  
+  
 @app.route('/verify',methods=["POST"])
 def verify():
     email=request.form['email']
@@ -81,6 +74,6 @@ def verify():
 def validate():
     user_otp=request.form['otp']
     if otp==int(user_otp):
-        return "<h3>Email verification succesfull</h3>"
+        return render_template('success.html')
     return "<h3>Please Try Again</h3>"
 
